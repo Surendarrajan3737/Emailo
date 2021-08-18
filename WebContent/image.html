@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="styles1.css">
+    <title>image recognition</title>
+    <script src="webcamjs-master/webcam.min.js"></script>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <script>
+        Webcam.set({
+            width: 640,
+            height: 480,
+            image_format: 'jpeg',
+            jpeg_quality: 90
+        });
+        var webinit = () => {
+            Webcam.attach('#liveFeed');
+        }
+    </script>
+</head>
+
+<body onload="webinit()" style="background-image:radial-gradient(rgb(31, 29, 29),rgb(32, 32, 32));">
+    <div class="center" style="width: 800px; height: auto;border-radius: 10px ;">
+        <img class="responsive-img" style="width: 250px;margin-top: 1%;" src="Resources/emailo-gif.gif" />
+        <div style="color: rgb(184, 184, 184); font-size: 150%; margin: auto ;" class="center">Please Verify your FaceID
+        </div>
+        <div class="faceContainer col s12 m2 z-depth-3"
+            style="height: 550px;width: auto; display: flex; flex-flow: column; justify-content: space-between;align-items: center; background-color: #3a3939c9;">
+            <div id="displayStrip">
+                <div class="col l6 s10 " id="liveFeed" style=" border-radius: 15px;margin-top: 3%;"></div>
+            </div>
+            <div id="buttonDiv" style="display: flex;justify-content: space-between; width: 300px;margin: 1% 0;">
+                <button class="btn" style="background-color: #8f9190;" id="capButton">Capture</button>
+                <button class="btn" style="background-color: #8f9190;display: none;" id="procButton">Proceed</button>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="api_call.js"></script>
+    <script >
+        var dataUrl;
+        var timerID;
+        var uName = sessionStorage.getItem("Username");
+        // if (uName == undefined) {
+        //     location.href='index.html';
+        // }
+        const take_snapshot = () => {
+            Webcam.snap(function (data_uri) {
+                dataUrl = data_uri;
+            });
+            Webcam.reset();
+            document.getElementById("capButton").innerHTML = 'Recapture';
+            document.getElementById("liveFeed").innerHTML = '<canvas id="myCanvas" style="width:640px; height:480px;"></canvas>';
+            var canvas = document.getElementById("myCanvas");
+            var ctx = canvas.getContext('2d');
+            var img = new Image;
+            var imgUrl;
+            img.onload = start;
+            img.src = dataUrl;
+            function start() {
+
+                canvas.width = 640;
+                canvas.height = 480;
+                var w = img.width;
+                var h = img.height;
+                var sizer = scalePreserveAspectRatio(w, h, canvas.width, canvas.height);
+                ctx.drawImage(img, 0, 0, w, h, 0, 0, w * sizer, h * sizer);
+
+            }
+
+            function scalePreserveAspectRatio(imgW, imgH, maxW, maxH) {
+                return (Math.min((maxW / imgW), (maxH / imgH)));
+            }
+        }
+
+        var makeblob = function (dataURL) {
+            var BASE64_MARKER = ';base64,';
+            if (dataURL.indexOf(BASE64_MARKER) == -1) {
+                var parts = dataURL.split(',');
+                var contentType = parts[0].split(':')[1];
+                var raw = decodeURIComponent(parts[1]);
+                return new Blob([raw], { type: contentType });
+            }
+            var parts = dataURL.split(BASE64_MARKER);
+            var contentType = parts[0].split(':')[1];
+            var raw = window.atob(parts[1]);
+            var rawLength = raw.length;
+
+            var uInt8Array = new Uint8Array(rawLength);
+
+            for (var i = 0; i < rawLength; ++i) {
+                uInt8Array[i] = raw.charCodeAt(i);
+            }
+
+            return new Blob([uInt8Array], { type: contentType });
+        }
+
+        var imageFetch = async () => {
+
+            var form = new FormData();
+            form.set("uName", uName);
+            console.log(JSON.stringify(form));
+            let response = await fetch('FetchImage', {
+                method: 'POST',
+                body: form,
+            }).then((data) => data.json())
+                .then(data => data)
+                .catch((err) => {
+                    console.log(err)
+                })
+            console.log(response);
+            console.log(typeof response.image)
+            if (response['image'] == 'default DBO') {
+                sessionStorage.setItem("Username", uName);
+                location.href = 'registerimage.html';
+            }
+        };
+        imageFetch();
+
+        async function processImage() {
+
+            console.log(uName);
+            // Perform the REST API call.
+            faceID1 = await returnFaceID1(makeblob(dataUrl));
+            faceID2 = await returnFaceID("https://raw.githubusercontent.com/yogeshraja/xylophone/master/yogeshcheck.jpg");
+            faceID1 = faceID1['faceId'];
+            faceID2 = faceID2['faceId'];
+            var match = await returnFaceMatch(faceID1, faceID2);
+            console.log(match)
+            if (match['isIdentical']) {
+                location.href = 'home.html'
+            }
+            else {
+                alert("Face Match Failed !! Please retry");
+            }
+        };
+
+        capButton.onclick = () => {
+            if (document.getElementById("capButton").innerHTML == 'Capture') {
+                take_snapshot();
+                document.getElementById("procButton").setAttribute("style","display:block");
+                procButton.onclick = () => {
+                    processImage();
+                }
+
+            }
+            else {
+                document.getElementById("capButton").innerHTML = 'Capture'
+                document.getElementById("procButton").setAttribute("style","display:none");
+                procButton.style.backgroundColor="#8f9190;"
+                webinit();
+            }
+        };
+    </script>
+</body>
+</html>

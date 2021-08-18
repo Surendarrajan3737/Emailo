@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:ital,wght@1,700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <title>Login | SignUp</title>
+</head>
+
+<body style="background-image: url('Resources/1626px-ESO-VLT-Laser-phot-33a-07.jpg');">
+  <div class="center" style="width: 800px; height: auto;">
+    <img class="responsive-img" style="width: 250px;margin-top: 10%;" src="Resources/emailo-gif.gif" />
+    <div style="color: rgb(242, 247, 248); font-size: 150%; margin-top:2% ;" class="center">Please login into your
+      account</div>
+    <div class="loginContainer col s12 m3 z-depth-5"
+      style="min-height: 400px;backdrop-filter: blur(1px);background-color: #2e2c2cc2;border-radius: 5%;">
+
+      <!-- <h3 class="heading"> emailo </h3> -->
+      <div class="row">
+        <form class="col s12" id="loginForm">
+          <div class="row">
+            <div class="input-field col s8 EmailID">
+              <i class="material-icons prefix">account_circle</i>
+              <input id="icon_prefix" type="text" class="validate" name="Login_ID" required
+                style="background-color: transparent;">
+              <label for="icon_prefix">Email</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s8 Password">
+              <i class="material-icons prefix">vpn_key</i>
+              <input id="password" type="password" class="validate" autocomplete='off' name="Login_pass" required>
+              <label for="password">Password</label>
+              <i class=" showPassword material-icons prefix">visibility_off</i>
+              <div style="font-size: 90%; margin-left: 60%; margin-top: 3%;">
+                <a style="color: #f87d7d;" href="sass.html">forgot password?</a>
+              </div>
+            </div>
+          </div>
+          <div id="button_strip " style=" width: 100%;">
+            <button class="btn waves-effect waves-light button login" type="submit">log in
+              <i class="material-icons right">arrow_forward</i>
+            </button>
+            <button class="btn waves-effect waves-light button login" type="reset"
+              onclick="location.href='otpValidation.html'">sign up
+              <i class="material-icons right">arrow_upward</i>
+            </button>
+          </div>
+
+        </form>
+        <div id="popup-js"></div>
+      </div>
+    </div>
+  </div>
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="popup.js"></script>
+  <script>
+    let sPass = document.querySelector('.showPassword');
+    sPass.addEventListener('click', () => {
+      if (sPass.innerHTML == 'visibility_off') {
+        sPass.innerHTML = 'visibility';
+        sPass.parentElement.querySelector('input').setAttribute('type', 'text');
+
+      }
+      else {
+        sPass.innerHTML = 'visibility_off';
+        sPass.parentElement.querySelector('input').setAttribute('type', 'password');
+      }
+    })
+
+
+  </script>
+
+  <script>
+    loginForm.onsubmit = async (e) => {
+
+      e.preventDefault();
+      var form = new FormData(loginForm);
+      form.set("Login_ID", String(document.getElementById("icon_prefix").value));
+      form.set("Login_Pass", String(document.getElementById("password").value));
+      console.log(JSON.stringify(form));
+      let data = await fetch('validateUser', {
+        method: 'POST',
+        body: form,
+      }).then((data) => data.json())
+        .then(data => data)
+        .catch((err) => {
+          console.log(err)
+        })
+      console.log(data);
+      if (data.response == 'Invalid login') {
+        location.href = 'register.html';
+      }
+      else if (data.response == 'Incorrect password') {
+        triggerPopup("Incorrect Password! Please try again")
+      }
+      else if (data.response == 'User successfully logged in') {
+        sessionStorage.setItem("Username", document.getElementById("icon_prefix").value)
+        location.href = 'image.html';
+      }
+
+    };
+  </script>
+</body>
+
+</html>

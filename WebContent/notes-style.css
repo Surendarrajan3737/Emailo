@@ -1,0 +1,65 @@
+
+.main-container{
+  width: 95%;
+  margin: auto;
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+}
+.container1{
+  margin: 20px;
+  
+}
+
+.container2{
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  margin-left: 5%;
+}
+
+.container3{
+  display: none;
+  position: absolute;
+  top: 26%;
+  left: 40%;
+}
+textarea{
+  box-shadow: 10px 10px 24px 0px rgba(0,0,0,0.75);
+  outline: none;
+  border: none;
+  width: 275px;
+  height: 275px;
+  padding: 40px 25px 25px 25px;
+}
+svg{
+  color: gray;
+}
+#check-icon{
+  position: absolute;
+  right: 17%;
+  top: 4%;
+}
+#x-icon{
+  position: absolute;
+  right: 5%;
+  top: 4%;
+}
+
+#notes{
+  display: none;
+  position: fixed;
+  z-index: 1;  
+  left: 15%;
+  top: 12%;  
+  width: 75%;  
+  height: 82%;  
+  overflow: auto;
+  background-color: rgb(218, 204, 204);  
+  border-radius: 20px;
+}
+
+@keyframes animatetop {
+  from {top: -300px; opacity: 0}
+  to {top: 0; opacity: 1}
+}

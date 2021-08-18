@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:ital,wght@1,700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="styles1.css">
+  <title>Register</title>
+</head>
+
+<body style="background-color:  #ffffff">
+
+  <div class="center" style="width: 800px; height: auto;">
+    <img class="responsive-img" style="width: 250px;margin-top: 10%;" src="Resources/emailo-gif.gif" />
+    <div style="color: rgb(222, 229, 230); font-size: 150%; margin-top:2% ;" class="center">Signup to create an account
+    </div>
+    <div class="loginContainer col s12 m2 z-depth-3"
+      style="background-color: rgba(255, 255, 255, .15);backdrop-filter: blur(5px); border-radius: 10px;">
+
+      <!-- <h3 class="heading"> emailo </h3> -->
+      <div class="row">
+        <form class="col s12">
+          <div class="row">
+            <div class="input-field col s8 register " style="margin-top: 60px !important;">
+              <!-- <i class="material-icons prefix">account_circle</i> -->
+              <input id="name" type="text" class="fname validate" onblur={validatefname()}>
+              <label for="name">First Name</label>
+            </div>
+            <div class="col s12 fnameValidation" style="color:white;">
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s8 register">
+              <input id="lastname" type="text" class="lname validate" onblur={validatelname()}>
+              <label for="lastname">Last Name</label>
+            </div>
+            <div class="col s12 lnameValidation" style="color:white;">
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s8 register">
+              <input id="mailID" type="text" class="emailid validate">
+              <label for="mailID">Choose Your Email</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class=" col s8 register">
+              <input type="text" class="date datepicker validate" placeholder="DOB" name="date">
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s8 register">
+              <!-- <i class="material-icons prefix">vpn_key</i> -->
+              <input id="password" type="password" class="pass validate" autocomplete='off' onblur={validatePass()}>
+              <label for="password">Password</label>
+              <i class=" showPassword material-icons prefix">visibility_off</i>
+            </div>
+            <div class="col s12 passValidation" style="color: white;">
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s8 register">
+              <input id="cpassword" type="password" class="cpass validate" autocomplete='off'
+                onblur={validateConfirmPass()}>
+              <label for="cpassword">Confirm Password</label>
+              <i class=" showPassword1 material-icons prefix">visibility_off</i>
+              <div class="col s12 confirmPasswordValidation" style="color: white;text-align: start;">
+
+              </div>
+              <div style="font-size: 90%; margin-left: 40%; margin-top: 3%;">
+                <a style="color:  #f72c2c;" href="index.html">Already have an account?</a>
+              </div>
+            </div>
+          </div>
+
+          <div id="button_strip" class="registerButton">
+            <button class="btn waves-effect waves-light " type="submit" name="action">Register
+              <!-- <i class="material-icons right">arrow_upward</i> -->
+            </button>
+        </form>
+      </div>
+
+
+    </div>
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $('.datepicker').datepicker();
+      });
+    </script>
+    <script>
+      let sPass = document.querySelector('.showPassword');
+      sPass.addEventListener('click', () => {
+        if (sPass.innerHTML == 'visibility_off') {
+          sPass.innerHTML = 'visibility';
+          sPass.parentElement.querySelector('input').setAttribute('type', 'text');
+
+        }
+        else {
+          sPass.innerHTML = 'visibility_off';
+          sPass.parentElement.querySelector('input').setAttribute('type', 'password');
+        }
+      })  
+    </script>
+    <script>
+      let s1Pass = document.querySelector('.showPassword1');
+      s1Pass.addEventListener('click', () => {
+        if (s1Pass.innerHTML == 'visibility_off') {
+          s1Pass.innerHTML = 'visibility';
+          s1Pass.parentElement.querySelector('input').setAttribute('type', 'text');
+
+        }
+        else {
+          s1Pass.innerHTML = 'visibility_off';
+          s1Pass.parentElement.querySelector('input').setAttribute('type', 'password');
+        }
+      })
+
+      var validated = true;
+
+
+      document.querySelector('form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        let fname = document.querySelector('.fname').value;
+        let lname = document.querySelector('.lname').value;
+        let email = document.querySelector('.emailid').value;
+        let date = document.querySelector('.date').value;
+        let password = document.querySelector('.pass').value;
+        let cpassword = document.querySelector('.cpass').value;
+        const user = {
+          fname,
+          lname,
+          email,
+          date,
+          password
+        }
+
+        console.log('user: ', user);
+
+        const createUser = async () => {
+          var formdat = new FormData();
+          formdat.set("fname", fname);
+          formdat.set("lname", lname);
+          formdat.set("email", email);
+          formdat.set("dob", date);
+          formdat.set("password", password);
+          formdat.set("pnumber", sessionStorage.getItem("number"));
+          console.log(JSON.stringify(formdat));
+          let response = await fetch('RegisterUser', {
+            method: 'POST',
+            body: formdat,
+          }).then((data) => data.json())
+            .then(data => data)
+            .catch((err) => {
+              console.log(err)
+            })
+          console.log(response);
+          if (response.response == "success") {
+            alert('Account has been sucessfully created');
+            location.href='index.html'
+          }
+          else {
+            alert("Account already exists")
+          }
+          return response;
+        }
+
+        validated = true;
+
+        if (password !== cpassword) {
+          validated = false;
+          document.querySelector('.confirmPasswordValidation').innerHTML = `passwords don't match`;
+          setTimeout(() => {
+            document.querySelector('.confirmPasswordValidation').innerHTML = ''
+          }, 2000)
+        }
+        else {
+          validatePass();
+          validatelname();
+          validatefname();
+          if (validated) {
+            var sereverResponse=createUser();
+            console.log(sereverResponse)
+            
+          }
+        }
+
+
+      });
+
+      //var regex = /^[a-zA-Z0-9!@#\$%\^\&*\\+=._-]{6,}$/g      
+
+      const validatePass = () => {
+        let pass = document.querySelector('.pass').value;
+        let passValid = document.querySelector('.passValidation');
+
+        if (pass.length < 8) {
+          passValid.innerHTML = `* password should be atleast 8 characters long<br />`;
+          validated = false;
+        }
+        let pattern1 = /[A-Z]/
+        if (!pattern1.test(pass)) {
+          passValid.innerHTML += `* should contain atleast one upper case character<br />`
+          validated = false;
+        }
+        let pattern2 = /[a-z]/
+        if (!pattern2.test(pass)) {
+          passValid.innerHTML += `* should contain atleast one lower case character <br />`
+          validated = false;
+        }
+        let pattern3 = /[0-9]/
+        if (!pattern3.test(pass)) {
+          passValid.innerHTML += `* should contain atleast one numberical digits <br />`
+          validated = false;
+        }
+        let pattern4 = /[!@#$%\^&/*+=._-]/
+        if (!pattern4.test(pass)) {
+          passValid.innerHTML += `* should contain atleast one special characters  <br />`
+          validated = false;
+        }
+        setTimeout(() => {
+          passValid.innerHTML = ''
+        }, 3000)
+
+      };
+
+      const validateConfirmPass = () => {
+        let pass = document.querySelector('.pass').value;
+        let cpass = document.querySelector('.cpass').value;
+        if (pass !== cpass) {
+          validated = false;
+          document.querySelector('.confirmPasswordValidation').innerHTML = `passwords don't match`;
+          setTimeout(() => {
+            document.querySelector('.confirmPasswordValidation').innerHTML = ''
+          }, 2000)
+        }
+
+      };
+
+      const validatefname = () => {
+        let fnameValue = document.querySelector('.fname').value
+        let pattern5 = /[!@#$%\^&/*+=._-]/
+        if (pattern5.test(fnameValue)) {
+          document.querySelector('.fnameValidation').innerHTML = `* should not contain any special characters`
+          validated = false;
+        }
+
+        setTimeout(() => {
+          document.querySelector('.fnameValidation').innerHTML = ''
+        }, 3000)
+
+      };
+      const validatelname = () => {
+        let lnameValue = document.querySelector('.lname').value
+        let pattern6 = /[!@#$%\^&/*+=._-]/
+        if (pattern6.test(lnameValue)) {
+          document.querySelector('.lnameValidation').innerHTML = `* should not contain any special characters`
+          validated = false;
+        }
+
+        setTimeout(() => {
+          document.querySelector('.lnameValidation').innerHTML = ''
+        }, 3000)
+
+      };
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+  .todos li{
+    background: #423a6f;
+  }
+  .delete{
+    cursor: pointer;
+  }
+  .filtered{
+    display: none !important;
+  }
+
+  #tasks{
+  display: none;
+  position: fixed;
+  z-index: 1;  
+  left: 15%;
+  top: 12%;  
+  width: 75%;  
+  height: 82%;  
+  overflow: auto;
+  background-color: rgb(44, 44, 44);  
+  border-radius: 20px;
+}
+
+@keyframes animatetop {
+  from {top: -300px; opacity: 0}
+  to {top: 0; opacity: 1}
+}

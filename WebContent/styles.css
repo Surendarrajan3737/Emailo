@@ -1,0 +1,550 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap');
+/* 
+url('Resources/1084px-ESO-VLT-Laser-phot-33a-07.jpg')
+radial-gradient(rgb(32, 16, 16),rgb(12, 12, 12)) 
+ url('Resources/1084px-ESO-VLT-Laser-phot-33a-07.jpg') 
+radial-gradient(rgb(49, 47, 47),rgb(36, 25, 25)) 
+radial-gradient(rgb(49, 47, 47),rgb(36, 25, 25)) 
+radial-gradient(rgb(31, 29, 29),rgb(32, 32, 32));  grey theme */
+body{
+  background-image: radial-gradient(rgb(31, 29, 29),rgb(32, 32, 32)); ;
+  position: relative;
+}
+
+.loginContainer {
+  margin: auto;
+  margin-top: 1%;
+  background-color: rgba(255, 255, 255, .15);
+  backdrop-filter: blur(5px);position: relative;  
+  width: 400px;
+  
+}
+img.logo_gif {
+  height: 10%;
+  width: 10%;
+}
+.center {
+  margin: auto;
+
+}
+.EmailID {
+  margin-top: 80px !important;
+  margin-left: 60px !important;
+}
+.Password {
+  margin-top: 0px !important;
+  margin-left: 60px !important;
+}
+.phoneNum,
+.verifyNum {
+  margin-top: 0px !important;
+  margin-left: 40px !important;
+}
+
+input[type="text"]:not(.browser-default):focus:not([readonly]) {
+  border-bottom: 2px solid rgb(208, 215, 252) !important;
+  box-shadow: 0 1px 0 0 rgb(237, 244, 250) !important;
+}
+.validate{
+    color: rgb(255, 255, 255);
+}
+.prefix{
+  color: #bcfcf6c9;
+}
+
+.input-field .prefix.active {
+  color: white !important;
+}
+.EmaiID label.active {
+  color: rgb(13, 223, 230) !important;
+}
+.Password label.active {
+  color: rgb(246, 246, 250) !important;
+}
+input[type="password"]:not(.browser-default):focus:not([readonly]) {
+  border-bottom: 2px solid #c2caf5 !important;
+  box-shadow: 0 1px 0 0 rgb(77, 219, 255) !important;
+}
+.heading {
+  margin-left: 170px;
+  color: rgb(32, 63, 32);
+  font-family: "Playfair Display SC", serif;
+}
+
+.btn {
+  /* color: rgb(32, 63, 32) !important; */
+  display: inline;
+  margin: 0px, 10px;
+  background-color: rgb(96, 96, 97);
+  border-radius: 12px;
+  margin: auto;
+}
+#button_strip{
+display: flex;
+justify-content: space-evenly;
+}
+
+.fPassword {
+  font-size: 15px;
+  margin-top: 2px;
+  margin-left: 400px;
+}
+
+.btn:hover {
+  background-color: rgba(43, 238, 245, 0.733);
+}
+
+.faceContainer{
+  height: 550px;
+  width: auto; 
+  display: flex; 
+  flex-flow: column; 
+  justify-content: space-evenly;
+  align-items: center;
+  
+}
+/* 
+.g-recaptcha{
+  background-color: #525353c9;
+} */
+
+#search_nav {
+  margin: auto;
+  margin-top: 1%;
+  width: 70%;
+  color: white;
+  border-radius: 15px;
+  background-color: rgb(124, 140, 155);
+  opacity: 80%;
+}
+#homeContainer {
+  display: inline-block;
+  max-height:600px;
+  background-color: rgba(255, 255, 255, .15);
+  backdrop-filter: blur(5px);position: relative;
+  overflow-y: scroll;
+  width: 75%;
+  min-height: 600px;
+  border-radius: 15px;
+}
+.nav_strip {
+  background-color: rgb(207, 167, 119);
+  border-radius: 10px;
+  width: 200px;
+}
+.nav_elements {
+  backdrop-filter: blur(10px);
+  display: flex;
+  border-bottom: 2px solid peachpuff;
+  flex: 1 1 auto;
+  /* min-height: 40px; */
+  padding: 10px;
+}
+.nav_elements i {
+  vertical-align: middle;
+}
+.nav_elements a {
+  color: rgb(192, 245, 247);
+}
+.nav_elements a i {
+  color: rgb(205, 205, 211);
+}
+.nav_elements:hover {
+  background-color: rgb(66, 66, 65);
+  backdrop-filter: blur(1px);
+  border-radius: 10px;
+}
+.nav_elements:focus {
+  background-color: rgb(66, 66, 65);
+  backdrop-filter: blur(1px);
+  border-radius: 10px;
+}
+.nav_elements:active{
+  background-color: rgb(66, 66, 65);
+  backdrop-filter: blur(1px);
+  border-radius: 10px;
+}
+
+.whiteBox {
+  background-color: white;
+  min-height: 80px;
+  
+}
+
+.util_strip {
+  padding-bottom:25px ;
+  display: flex;
+  flex-flow: column;
+  flex-direction: column;
+  background-color: rgb(207, 167, 119);
+  border-radius: 10px;
+  min-width: 100px;
+  justify-content: space-evenly;
+}
+.util_elements:hover {
+  background-color: rgb(110, 110, 109);
+  backdrop-filter: blur(1px);
+  border-radius: 10px;
+}
+
+.util_elements {
+  /* backdrop-filter: blur(1px); */
+  display: flex;
+  justify-content: center;
+  flex: 1 1 100px;
+  margin-top: 20%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+.util_elements a i {
+  
+  font-size: 4em;
+  color: rgb(202, 212, 240);
+}
+
+.myCard {
+  background-color: rgb(158, 160, 160);
+  backdrop-filter: blur(1px);
+  width: 100%;
+  min-height: 30px;
+  max-height: 50px;
+  padding-left: 10px;
+  border-bottom: 1px solid rgb(136, 136, 136);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 2px;
+}
+
+.myCard:hover {
+  box-shadow: 10px 0px 15px 3px rgb(174, 175, 177);
+  background-color: #c2c8ca;
+  cursor: pointer;
+}
+
+#mailOptions{
+  display: flex;
+  position: absolute;
+  visibility: hidden;
+  right: 0px;
+}
+
+.myCard:hover > #mailOptions{
+  visibility: visible;
+}
+.myCard:hover > #mailTime{
+  visibility: hidden;
+}
+
+.myCardContent {
+  margin-block-start: 0 !important;
+  margin-block-end: 0 !important;
+}
+.chkbx{
+  position: relative;
+}
+[type="checkbox"]:checked + span:not(.lever):before {
+  border-right: 2px solid rgb(12, 75, 247);
+  border-bottom: 2px solid rgb(12, 75, 247);
+}
+
+/* compose html  */
+#Subject{
+  background-color: white;
+  border-radius: 5px;
+  height: 35px;
+}
+#To{
+  background-color: white;
+  border-radius: 5px;
+  height: 30px;
+}
+
+#mailContent{
+  background-color: white;
+  height: 250px;
+  width: 100%;
+  resize: none;
+}
+
+#myfile{
+    color: #f5efef;
+    border-radius: 50px 50px 50px 50px;
+}
+
+#sendBtn{
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  float: right;
+  border-radius:50%;
+  transform: translate(2px,1px);
+  background-color: #dbdfdfc9;
+  border:  1px solid black;
+}
+#draftBtn{
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  margin-right:10px ;
+  float: right;
+  border-radius:50%;
+  transform: translate(2px,0px);
+  background-color: #dbdfdfc9;
+  border:  1px solid black;
+}
+#cmpBX{
+  display: flex;
+  flex-direction: row-reverse;
+  max-height: 500px;
+  max-width: 1000px;
+  position: absolute;
+  bottom:-2%;
+  right: 8%;
+  border-radius: 2%;
+}
+
+
+.composeWrap{
+  border: #b8b9bb solid 2px;
+  box-shadow:10px #b8b9bb ;
+  border-radius: 2%;
+  margin-right: 10px;
+  background-color: rgba(77, 80, 80, 0.89);
+  backdrop-filter: blur(1px);
+}
+
+.headerBox{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  top:0;
+  height: 6%;
+  width: 100%;
+  background-color: #0c0c0cc9;
+  color: rgb(250, 253, 252);
+}
+
+.closeCompose{
+  color: white;
+  margin-right: 3%;
+  margin-top: .5%;
+  cursor: pointer; 
+  font-family: 'Roboto', sans-serif;
+}
+
+.head_area {
+  /* border: 1px solid white;     */
+  margin: 40px 100px 1px 100px;
+  min-height: 50px;
+  min-width: 300px;
+}
+
+#star_inbox_read:hover{
+  cursor: pointer;
+  background-color: #6c7783;
+  border-radius: 40%;
+}
+
+#delete_inbox_read:hover{
+  cursor: pointer;
+  background-color: #6c7783;
+  border-radius: 40%;
+}
+
+#more_inbox_options:hover{
+  cursor: pointer;
+  background-color: #6c7783;
+  border-radius: 40%;
+}
+
+
+
+#mailUname{
+  color: #fff;
+  padding: 0;
+  margin: 14 0 5;
+}
+
+#dropdowndiv:hover>#dropdown1{
+  visibility: visible;
+}
+
+#dropdown1:active{
+  visibility: visible;
+}
+
+#dropdowndiv{
+height: 20px;
+}
+#dropdown1 {
+  visibility: hidden;
+  position: absolute;
+  transform: translate(-50px,10px);
+}
+#dropdown1 li {
+  text-decoration: none;
+  background-color: rgb(119, 118, 118);
+  backdrop-filter: blur(1px);
+  padding: 5px 10px;
+}
+#dropdown1 li a{
+  color: #f6f9fac9;
+}
+.dropicons{
+  color: black !important;
+}
+
+.inboxIcons {
+  position: relative;
+  top: 30px;
+}
+
+.extras {
+  position: absolute;
+  right: 20px;
+}
+
+.showPassword:hover {
+  cursor: pointer;
+}
+
+input.valid[type="text"]:not(.browser-default) {
+  /* border-bottom:1px solid red !important; */
+  border-bottom: 1px solid rgba(83, 81, 81, 0.5) !important;
+  box-shadow: 0 0px 0 0 rgba(223, 221, 221, 0.5) !important;
+}
+
+.extraIcons{
+  display: flex;
+  float: right;
+  margin-left: 30%;
+}
+
+.profileImage {
+  width: 85%;
+}
+
+.phoneBtn {
+  position: relative;
+  left: 40px;
+  bottom: 10px;
+}
+
+.verifyBtn {
+  position: relative;
+  left: 122px;
+  bottom: 10px;
+  visibility: hidden;
+}
+
+.resend {
+  width: 100%;
+  visibility: hidden;
+}
+
+
+.accountProfile{
+    /* z-index: 10 !important; */
+    margin-right: 2em;
+    position: absolute;
+    right: 30px;
+    top: 5px;
+    cursor: pointer;
+}
+
+.logoutBox{
+
+    height: 40px;
+    width: 110px;
+    background-color: transparent;
+    position: absolute;
+    right: 2px;
+    top: 0;
+    color: white;
+    font-size: 20px;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer; 
+    margin: 0px!important;
+}
+
+/* compose html  */
+
+.head_area{
+    /* border: 1px solid white;     */
+    margin: 10px ;
+    min-height: 50px;
+}
+
+.content_area{
+    min-height: 30%;
+    margin: 1px 50px 20px 50px ;
+}
+
+.dropdown-content li>a{
+    color:rgb(82, 83, 83);
+    padding: 5px 10px;
+}
+
+.extras{
+    position: absolute;
+    right: 20px;
+    
+}
+
+.showPassword:hover{
+    cursor: pointer;
+}
+
+input.valid[type=text]:not(.browser-default){
+    /* border-bottom:1px solid red !important; */
+    border-bottom:1px solid rgba(83, 81, 81, 0.5) !important;
+    box-shadow: 0 0px 0 0 rgba(223, 221, 221, 0.5) !important;
+}
+
+.profileImage{
+    
+    width: 85%;
+}
+
+
+label,
+textarea {
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    color: white;
+}
+textarea {
+    padding: 10px;
+    line-height: 1.2;
+    border-radius: 10px;
+    border: 1px solid #cccccc;
+    box-shadow: 1px 1px 1px #999;
+    color: black;
+    background: white;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+#Subject {
+	margin-bottom: 20px;
+}
+
+.txtarea{
+  padding-top: 10px;
+	text-align: left;
+
+}
+
+#Button:hover{
+	color: white;
+	background: gray;
+}

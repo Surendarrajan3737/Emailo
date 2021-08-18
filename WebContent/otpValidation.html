@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:ital,wght@1,700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+  <script type="text/javascript">
+    var onloadCallback = function () {
+      grecaptcha.render('recaptcha', {
+        'sitekey': '6LdU20IaAAAAACkA7plGfI9T7DTsAju9LjfuhHLk'
+      });
+    };
+  </script>
+  <title>OTP Validation</title>
+</head>
+
+<body style="background-color:  #ffffff">
+  <div class="center" style="width: 800px; height: auto;">
+    <img class="responsive-img" style="width: 250px;margin-top: 10%;" src="Resources/emailo-gif.gif" />
+
+    <div style="color: rgb(229, 229, 231); font-size: 150%; margin-top:2% ;" class="center phoneTitle">Enter your phone number</div>
+
+    <div class="loginContainer col s12 m2 z-depth-3 " style="min-height: 200px !important;">
+
+      <!-- <h3 class="heading"> emailo </h3> -->
+      <div class="row">
+        <form class="col s12" id="otpform">
+          <div class="row">
+            <div class="input-field col s9 phoneNum" style="margin-top: 30px !important;">
+              <i class="material-icons prefix">phone</i>
+              <input id="phoneNumber" type="text" name="phoneNumber" class="validate" maxlength="10" minlength="10" required>
+              <label for="phoneNumber">phone</label>
+            </div>
+            <div class="input-field col s9 verifyNum">
+              <i class="material-icons prefix ">lock</i>
+              <input id="otp" name="otp" type="text" class="validate " disabled >
+              <label for="otp">Enter the OTP </label>
+            </div>
+          </div>
+        </form>
+        <div id="button_strip" style="display: inline-block; width: 100%;">
+          <button class="btn waves-effect waves-light button phoneBtn" style="margin-top:0px; margin-left: 30%;">Submit
+          </button>
+          <div id="recaptcha" class="g-recaptcha" data-theme="dark" data-sitekey="6LdU20IaAAAAACkA7plGfI9T7DTsAju9LjfuhHLk"
+          style="margin-left: 14%;margin-bottom: 5%;"></div>
+        </div>
+        <button class="btn waves-effect waves-light button verifyBtn">verify
+        </button>
+      </div>
+    </div>
+
+
+
+
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <script>
+      var getOtp = async () => {
+        console.log('Entering');
+        var form = new FormData(otpform);
+        form.set("phoneNumber", String(document.getElementById('phoneNumber').value))
+        form.set("otp", document.getElementById('otp').value)
+        console.log(JSON.stringify(form));
+        let response = await fetch('validateOtp', {
+          method: 'POST',
+          body: form,
+        }).then((data) => data.json())
+          .then(data => data)
+          .catch((err) => {
+            console.log(err)
+          })
+        console.log(response);
+        document.getElementById('hiddenVal').innerHTML = response;
+      };
+    </script>
+    <script>
+      var submitBtn = document.querySelector('.phoneBtn');
+      var verifyBtn = document.querySelector('.verifyBtn');
+      submitBtn.addEventListener('click', () => {
+        var pass = document.getElementById('phoneNumber').value;
+        console.log(typeof pass)
+        var n= pass.length;
+        console.log("Pass---->" + pass+"....."+n)
+        let pattern3 = new RegExp("/[0-9]{10}/");
+        if (n!=10) {
+          alert('Please Enter a valid number');
+          return;
+        }
+        console.log(pass);
+        getOtp()
+        document.querySelector('.phoneTitle').textContent = 'Verify Number';
+        submitBtn.style.visibility = 'hidden';
+        verifyBtn.style.visibility = 'visible';
+        submitBtn.parentElement.removeChild(submitBtn);
+        document.querySelector('#phoneNumber').setAttribute('disabled', '');
+        document.querySelector('.verifyNum').innerHTML = document.querySelector('.verifyNum').innerHTML + `
+          <div style="font-size: 90%; margin-left: 35%; margin-top: 3%;">
+            <span class="" >Resend OTP in</span>
+            <span><span class="timer">59</span></span>
+            <a href='#!' class="resend" style="color: red; display: inline-block;width :100%" onclick="getOtp()"> Click here to resend OTP</a>
+            </div>
+            `;
+        document.getElementById("otp").disabled = false;
+
+        myOwnTimer();
+      });
+      verifyBtn.addEventListener('click', () => {
+        var usrInp = document.getElementById('otp').value;
+        var generatedOtp = document.getElementById('hiddenVal').innerHTML;
+        if (Number(usrInp) == Number(generatedOtp)) {
+          sessionStorage.setItem("number",document.getElementById('phoneNumber').value);
+          location.href = 'register.html';
+        }
+        else {
+          alert('Invalid OTP\nPlease try again');
+          document.getElementById('phoneNumber').disabled = false;
+        }
+      })
+      const myOwnTimer = () => {
+        let time = document.querySelector('.timer');
+        var myTimer = setInterval(() => {
+          let currentTime = time.textContent;
+          time.textContent = Number(currentTime) - 1;
+          if (currentTime == 1) {
+            document.querySelector('.resend').style.visibility = 'visible';
+            let resendOTP = document.querySelector('.resend');
+            var i = 1;
+            resendOTP.addEventListener('click', () => {
+              document.querySelector('.resend').style.visibility = 'hidden';
+              time.textContent = 60 * ++i;
+              myOwnTimer();
+
+            });
+            clearInterval(myTimer)
+          }
+        }, 1000);
+      };
+    </script>
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer>
+    </script>
+    <div id="hiddenVal" style="visibility:hidden ;"></div>>
+</body>
+
+</html>

@@ -1,0 +1,260 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+      <title>Insert title here</title>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <!-- Compiled and minified CSS -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link rel="stylesheet" href="styles.css">
+      <title>inbox</title>
+      <script src="https://kit.fontawesome.com/4a39ce030f.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body style="background-image: radial-gradient(rgb(32, 16, 16),rgb(12, 12, 12));position: relative;">
+      <div
+            style="width: 100%; background-color: rgba(255, 255, 255, .15);backdrop-filter: blur(5px); border-bottom: 2px solid rgb(125, 195, 255); display: block;justify-content: space-around;">
+            <a href="home.html"><img id="logo_gif" src="./Resources/emailo-gif.gif" alt="Home Page"
+                        style="position: absolute;;margin: 1%;width: 10%;"></a>
+
+            <nav id="search_nav" style="margin-bottom:5px;margin-top: 0px;">
+                  <div class="nav-wrapper" style="background-color: rgb(146, 148, 151);border-radius: 10px;">
+                        <form>
+                              <div class="input-field">
+                                    <input id="search" type="search" required
+                                          style="color: rgb(61, 61, 61);border-radius: 10px;margin-top:5px ;">
+                                    <label class="label-icon" for="search" style="color: rgb(65, 138, 43);"><i
+                                                class="material-icons">search</i></label>
+                                    <i class="material-icons" data->close</i>
+                              </div>
+                        </form>
+                  </div>
+            </nav>
+            <div class=" right accountProfile">
+                  <i class="medium material-icons white-text">account_circle</i>
+            </div>
+            <div class="logoutBox" style="visibility: hidden;">
+                  <div> <span style="position: relative;bottom: 20px;">Logout</span> <i
+                              class="small material-icons white-text">exit_to_app</i></div>
+            </div>
+      </div>
+
+
+      <div style="display:flex;flex-direction: row; width: 100%;justify-content: space-around;margin-top: 1%;">
+            <div class="nav_stip z-depth-3"
+                  style="background-color: rgba(255, 255, 255, .15);backdrop-filter: blur(5px); border-radius: 10px;width: 200px;">
+                  <div class="nav_elements"><a href="#!" style="font-size: large;"><i class="small material-icons"
+                                    id="inbox">inbox</i>Inbox</a></div>
+
+                  <div class="nav_elements"><a href="#!" style="font-size: large;"><i class="small material-icons"
+                                    id="draft">drafts</i>Drafts</a></div>
+
+                  <div class="nav_elements"><a href="#!" style="font-size: large;"><i class="small material-icons"
+                                    id="sent">send</i>Sent</a></div>
+
+                  <div class="nav_elements"><a href="#!" style="font-size: large;"><i class="small material-icons"
+                                    id="starred">star</i>Starred</a></div>
+
+                  <div class="nav_elements"><a href="#!" style="font-size: large;"><i class="small material-icons"
+                                    id="Trash">delete</i>Trash</a></div>
+
+                  <div class="whiteBox" style="background-color: transparent"></div>
+                  <div class="util_elements"><a href="https://www.github.com" style="font-size: large;" target="_blank"
+                              rel="noopener"><i class="fab fa-github"></i></a>
+                  </div>
+
+                  <div class="util_elements"><a href="settings.html" style="font-size: large;"><i
+                                    class="fas fa-users-cog"></i></a>
+                  </div>
+
+
+            </div>
+            <div id="homeContainer" class="col s12 m2 z-depth-3"
+                  style="display: inline-block;max-height:600px;background-color: rgba(255, 255, 255, .15);backdrop-filter: blur(5px);position: relative;overflow-y: scroll;">
+                  <div class="head_area" style="display: flex;justify-content: space-between; ">
+                        <div style="display: flex;">
+                              <div style="display: block; margin: 8% 0 0 13%;">
+                                    <img src="./Resources/profileSample.png" class="profileImage" alt="profile image"
+                                          style="height: 65px;width: 65px; border-radius: 50%;">
+                              </div>
+                              <div style="display: block; margin: 5% 0% 0 5%;">
+                                    <p id="mailUname" style="color: #fff;">pradakshina T M</p>
+                                    <p id="mailUID" style="color: #fff ;margin-top: -2%;">18euit102@skcet.ac.in</p>
+                              </div>
+                        </div>
+                        <div class="extraIcons">
+                              <div>
+                                    <i class="small material-icons inboxIcons starIcon" style="color: black;"
+                                          id="star_inbox_read">star_border</i>
+                              </div>
+                              <div>
+                                    <i class="small material-icons inboxIcons" style="color: black;"
+                                          id="delete_inbox_read">delete</i>
+                              </div>
+                              <div id="dropdowndiv">
+                                    <i class="small material-icons inboxIcons" style="color: black;"
+                                          id="more_inbox_options">more_vert</i>
+                                    <ul id='dropdown1'>
+                                          <li><a href="#!"><i class="material-icons dropicons">reply</i>reply</a>
+                                          </li>
+                                          <li><a href="#!"><i class="material-icons dropicons">forward</i>forward</a>
+                                          </li>
+                                          <li><a href="#!"><i class="material-icons dropicons">print</i>print</a>
+                                          </li>
+                                    </ul>
+                              </div>
+                        </div>
+                  </div>
+                  <div class="content_area">
+                        <div id="mailBody" style="background-color: #fff;padding: 1%;">
+                              <span id="mailSubject" style="font-weight: bold;color: black; font-size: large;">Email
+                                    subject</span>
+                              <p id="mailText"
+                                    style="min-height: 70%;background-color: #fff; width: 100%;margin: 0 2% 0 1%;">
+                                    email content ...Lorem, ipsum dolor sit amet consectetur adipisicing
+                                    elit. Odio adipisci tempora quam porro? Nostrum, sit iusto
+                                    voluptatem minima deserunt minus doloremque maiores dolore
+                                    adipisci non expedita alias quas eos vero. Quos sequi tenetur
+                                    deleniti praesentium vero iusto repellendus natus illo rerum
+                                    voluptatem facilis, optio magnam porro, sunt sit ipsum, quas quia
+                                    reiciendis excepturi est esse voluptates mollitia. Voluptas, sint.
+                                    Reiciendis quam alias corrupti nemo quasi saepe blanditiis dolores
+                                    placeat? Doloremque blanditiis quod, possimus vero reiciendis
+                                    accusamus nulla magnam facere ipsa cum nisi facilis eos adipisci
+                                    ad laborum laudantium error! Provident impedit quam ea fuga ut!
+                                    Nihil minus dolorum perferendis accusamus.
+                                    Lorem ipsum, dolor sit amet consectetur amskjcing elit.
+                                    Consectetur nisi, esse totam sunt, reiciendis ex porro quasi
+                                    mollitia ipsa quo, labore voluptates molestias qui magni ipsam
+                                    corporis reprehenderit ipsum voluptatibus nam. Vitae, dicta animi
+                                    aut voluptatum quis sequi quae, saepe, molestias possimus magnam
+                                    ipsum placeat ad nesciunt blanditiis officiis laboriosam facilis
+                                    accusantium delectus soluta corrupti eius repudiandae cupiditate?
+                                    Nostrum labore excepturi optio non temporibus saepe autem
+                                    deserunt. Iusto culpa possimus expedita est earum libero unde,
+                                    voluptate maiores ipsa amet ad beatae voluptates, sunt temporibus!
+                                    Harum praesentium laudantium, ad perferendis deserunt iure.
+                                    Ratione quam consequuntur dolor impedit velit veritatism?
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
+                                    odio in, voluptatem culpa inventore id vitae quas ducimus
+                                    reiciendis dignissimos!lorem Lorem ipsum dolor sit amet
+                                    consectetur, adipisicing elit. Corporis veniam saepe adipisci,
+                                    aspernatur facere aut!
+                                    lorem*20
+                              </p>
+                        </div>
+                  </div>
+
+            </div>
+            <div class="util_strip z-depth-3"
+                  style="background-color: rgba(255, 255, 255, .15);backdrop-filter: blur(5px);">
+
+                  <div class="util_elements"><a href="#!" style="font-size: large;"><i
+                                    class="far fa-calendar-alt"></i></a>
+                  </div>
+                  <div class="util_elements"><a href="#!" style="font-size: large;"><i
+                                    class="fas fa-sticky-note "></i></a>
+                  </div>
+
+                  <div class="util_elements"><a href="#!" style="font-size: large;"><i class="fas fa-tasks"
+                                    alt="tasks"></i></a>
+                  </div>
+
+                  <div class=" util_elements cIcon" onclick="addComposeBox()"
+                        style="display: block; align-items: baseline;font-size: large;">
+                        <i class="fas  fa-plus"
+                              style="margin-left: 15%; display: block;color: aliceblue;font-size: 4em;"></i>
+                        <span style="font-size: 22px;color: aliceblue;display: block;">&nbsp;Compose</span>
+                  </div>
+
+
+            </div>
+      </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+      <script defer>
+            function addListeners() {
+                  let st = document.getElementById('star_inbox_read');
+                  st.addEventListener('click', () => {
+                        if (st.innerHTML == 'star') {
+                              st.innerHTML = 'star_border'
+                        } else {
+                              st.innerHTML = 'star'
+                        }
+                  });
+                  document.querySelector('.accountProfile').addEventListener('click', () => {
+                        let logbox = document.querySelector('.logoutBox');
+                        logbox.style.visibility = logbox.style.visibility == 'visible' ? 'hidden' : 'visible';
+
+                  });
+                  document.querySelector('.logoutBox').addEventListener('click', () => {
+                        location.href = './index.html'
+                  });
+            }
+
+            addListeners();
+            var homeContents;
+            var compID = 1;
+            var flag = true;
+            function addComposeBox() {
+                  var composeBox = `<div class="composeWrap">
+                  <div class="headerBox">
+                        <p style="margin-left:3%;transform: translateY(-10px);" color:white>New Message<p>
+                        <div id='closeCompose${compID}' class="closeCompose" onclick()="(e)=> {
+                        let compose = e.target.parentNode.parentNode;
+                        console.log(compose.id);
+                        compose.remove();
+                  }">X</div>
+                  </div>
+                  <div style="height:450px;width:500px">
+                        <div class="head_area">
+                              <div class="row" style="margin-bottom: 0px;">
+                                    <!-- compose -->
+                                    <form action="https://www.google.com" method="POST">
+                                          <input type="text" placeholder="Recepients:" id="To" name="To" />
+                                          <input type="text" id="Subject" placeholder="Subject" name="Subject" />
+                                          <textarea placeholder="Content Here!" id="mailContent" class="txtarea" spellcheck="true"></textarea>
+                                          <br>
+                                          <label for="myfile">Select files:</label>
+                                          <input type="file" id="myfile" name="myfile" multiple style="float: left;">
+                                          <button id="sendBtn" type="submit" value="Send" >
+                                                <i class="material-icons">send</i>
+                                          </button>
+                                          <button id="draftBtn" type="submit" value="Draft" >
+                                                <i class="material-icons">drafts</i>
+                                          </button>
+
+                                    </form>
+                                    <div class="col l3 m4 s12">
+                                          <div class="row extraIcons">
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>
+                  </div>
+            </div>
+`;
+                  console.log(compID)
+                  var cmpBox = document.getElementById("cmpBX");
+                  cmpBox.innerHTML += composeBox;
+                  document.getElementById(`closeCompose${compID}`).onclick = function (e) {
+                        let compose = e.target.parentNode.parentNode;
+                        console.log(compose.id);
+                        compose.remove();
+                  }
+                  compID++;
+            }
+
+      </script>
+      <div id="cmpBX">
+
+      </div>
+</body>
+
+</html>

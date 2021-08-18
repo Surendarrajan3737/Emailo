@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form id="formElem">
+  		EmailID:<input type="text" id="Login_ID" value="Admin@thundermail"><br>
+  		Type:<input type="text" id="Login_Pass" value="Admin@Password"><br>
+  		<input type="submit">
+</form>
+
+<script>
+  formElem.onsubmit = async (e) => {
+    
+    e.preventDefault();
+    var form= new FormData(formElem);
+    form.set("emailID",String(document.getElementById("Login_ID").value));
+    form.set("mailtype",String(document.getElementById("Login_Pass").value));
+	  console.log(JSON.stringify(form));
+    let response = await fetch('indextesting', {
+      method: 'POST',
+      body: form,
+    }).then((data)=>data.json())
+    .then(data=>data)
+    .catch((err)=>{
+      console.log(err)
+    })
+    console.log(response);
+  };
+</script>
+</body>
+</html>
